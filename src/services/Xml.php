@@ -2,6 +2,7 @@
 namespace fostercommerce\shipstationconnect\services;
 
 use Craft;
+use craft\helpers\Json;
 use fostercommerce\shipstationconnect\Plugin;
 use fostercommerce\shipstationconnect\events\OrderFieldEvent;
 use craft\commerce\Plugin as CommercePlugin;
