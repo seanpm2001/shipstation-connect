@@ -1,6 +1,7 @@
 <?php
 namespace fostercommerce\shipstationconnect\services;
 
+use Craft;
 use fostercommerce\shipstationconnect\Plugin;
 use fostercommerce\shipstationconnect\events\OrderFieldEvent;
 use craft\commerce\Plugin as CommercePlugin;
@@ -39,7 +40,15 @@ class Xml extends Component
         $orders_xml = $xml->getName() == $name ? $xml : $xml->addChild($name);
         foreach ($orders as $order) {
             if ($this->shouldInclude($order)) {
-                $this->order($orders_xml, $order);
+                try {
+                    $this->order($orders_xml, $order);
+                } catch (\Exception $e) {
+                    Craft::error(
+                        Craft::t('shipstationconnect', 'Error processing Order ID {id}', ['id' => $order->id]),
+                        __METHOD__
+                    );
+                    throw $e;
+                }
             }
         }
 
