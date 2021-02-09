@@ -43,11 +43,11 @@ class Xml extends Component
                 try {
                     $this->order($orders_xml, $order);
                 } catch (\Exception $e) {
-                    Craft::error(
-                        Craft::t('shipstationconnect', 'Error processing Order ID {id}', ['id' => $order->id]),
-                        __METHOD__
-                    );
-                    throw $e;
+                    throw new \Exception(Json::encode([
+                        'orderId' => $order->id,
+                        'shippingAddress' => $order->getShippingAddress(),
+                        'billingAddress' => $order->getBillingAddress(),
+                    ]));
                 }
             }
         }

@@ -2,6 +2,7 @@
 namespace fostercommerce\shipstationconnect\controllers;
 
 use Craft;
+use craft\helpers\Json;
 use craft\web\Controller;
 use craft\elements\MatrixBlock;
 use craft\commerce\Plugin as CommercePlugin;
@@ -79,7 +80,7 @@ class OrdersController extends Controller
             return $this->asErrorJson($e->getMessage())->setStatusCode($e->statusCode);
         } catch (\Exception $e) {
             $this->logException('Error processing action {action}', ['action' => $action], $e);
-            return $this->asErrorJson($e->getMessage())->setStatusCode(500);
+            return $this->asJson(Json::decodeIfJson($e->getMessage()))->setStatusCode(500);
         }
     }
 
