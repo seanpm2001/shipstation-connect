@@ -452,7 +452,17 @@ class Xml extends Component
                 'PostalCode' => 'zipCode',
                 'Country' =>  [
                     'callback' => function ($address) {
-                        return $address->countryId ? $address->getCountry()->iso : null;
+                        $countryIso = null;
+                        if ($address->countryId) {
+                            $countryIso = $address->getCountry()->iso;
+                        }
+
+                        if (empty($countryIso)) {
+                            // TODO remove this throw; handle neatly
+                            throw new \Exception('Missing country ISO');
+                        }
+
+                        return $countryIso;
                     },
                     'cdata' => false,
                 ]
