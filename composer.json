@@ -1,37 +1,53 @@
 {
-    "name": "fostercommerce/shipstationconnect",
-    "description": "A Craft CMS plugin for integrating Craft Commerce with ShipStation",
-    "homepage": "https://github.com/fostercommerce/shipstation-connect",
-    "type": "craft-plugin",
-    "version": "2.0.3",
-    "keywords": ["craft","plugin","shipstation"],
-    "license": "proprietary",
-    "support": {
-        "email": "support@fostercommerce.com",
-        "issues": "https://github.com/fostercommerce/shipstation-connect/issues?state=open",
-        "source": "https://github.com/fostercommerce/shipstation-connect/issues",
-        "docs": "https://github.com/fostercommerce/shipstation-connect/",
-        "rss": "https://github.com/fostercommerce/shipstation-connect/releases.atom"
-    },
-    "authors": [{
-        "name": "Foster Commerce",
-        "homepage": "https://www.fostercommerce.com"
-    }],
-    "autoload": {
-        "psr-4": {
-          "fostercommerce\\shipstationconnect\\": "src/"
-        }
-      },
-    "require": {
-        "craftcms/cms": "^4.0",
-        "craftcms/commerce": "^4.0"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.13"
-    },
-    "extra": {
-      "handle": "shipstationconnect",
-      "name": "ShipStation Connect",
-      "developer": "Foster Commerce"
+  "name": "fostercommerce/shipstationconnect",
+  "description": "A Craft CMS plugin for integrating Craft Commerce with ShipStation",
+  "homepage": "https://github.com/fostercommerce/shipstation-connect",
+  "type": "craft-plugin",
+  "version": "2.0.3",
+  "keywords": ["craft","plugin","shipstation"],
+  "license": "proprietary",
+  "support": {
+    "email": "support@fostercommerce.com",
+    "issues": "https://github.com/fostercommerce/shipstation-connect/issues?state=open",
+    "source": "https://github.com/fostercommerce/shipstation-connect/issues",
+    "docs": "https://github.com/fostercommerce/shipstation-connect/",
+    "rss": "https://github.com/fostercommerce/shipstation-connect/releases.atom"
+  },
+  "authors": [{
+    "name": "Foster Commerce",
+    "homepage": "https://www.fostercommerce.com"
+  }],
+  "autoload": {
+    "psr-4": {
+      "fostercommerce\\shipstationconnect\\": "src/"
     }
+  },
+  "require": {
+    "craftcms/cms": "^4.0",
+    "craftcms/commerce": "^4.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-latest",
+    "craftcms/phpstan": "dev-main",
+    "craftcms/ecs": "dev-main",
+    "craftcms/rector": "dev-main"
+  },
+  "extra": {
+    "handle": "shipstationconnect",
+    "name": "ShipStation Connect",
+    "developer": "Foster Commerce"
+  },
+  "config": {
+    "allow-plugins": {
+      "yiisoft/yii2-composer": true,
+      "craftcms/plugin-installer": true
+    }
+  },
+  "scripts": {
+    "phpstan": "phpstan --memory-limit=1G",
+    "ecs-check": "ecs check --ansi --memory-limit=1G",
+    "ecs-fix": "ecs check --ansi --fix --memory-limit=1G",
+    "rector": "rector process",
+    "rector-dry-run": "rector process --dry-run"
+  }
 }
