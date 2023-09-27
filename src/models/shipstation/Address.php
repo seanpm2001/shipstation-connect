@@ -15,14 +15,19 @@ namespace fostercommerce\shipstationconnect\models\shipstation;
 class Address extends \craft\base\Model
 {
     /**
-     * @var string Full name of addressee.
+     * @var string Label of address.
      */
-    public $name;
+    public $label;
 
     /**
      * @var string First name of addressee.
      */
     public $firstName;
+
+     /**
+     * @var string Last name of addressee.
+     */
+    public $lastName;
 
     /**
      * @var string Full name of addressee.
@@ -30,44 +35,29 @@ class Address extends \craft\base\Model
     public $fullName;
 
     /**
-     * @var string|null Company name.
+     * @var string|null Organization name.
      */
-    public $companyName;
-
-    /**
-     * @var string|null Company name.
-     */
-    public $company;
+    public $organization;
 
     /**
      * @var string First line of address.
      */
-    public $address1;
+    public $addressLine1;
 
     /**
      * @var string|null Second line of address.
      */
-    public $address2;
+    public $addressLine2;
+
+    /** 
+     * @var string|null City
+     */
+    public $locality;
 
     /**
-     * @var string|null Full address.
+     * @var string|null State
      */
-    public $fullAddress;
-
-    /**
-     * @var string Name of city.
-     */
-    public $city;
-
-    /**
-     * @var string Two-character abbreviation for country.
-     */
-    public $country;
-
-    /**
-     * @var string Two-character abbreviation for province or U.S. state.
-     */
-    public $province;
+    public $administrativeArea;
 
     /**
      * @var string Postal code number.
@@ -75,19 +65,19 @@ class Address extends \craft\base\Model
     public $postalCode;
 
     /**
-     * @var string|null Associated phone number.
+     * @var string|null CountryCode
+     */
+    public $countryCode;
+
+    /**
+     * @var string|null Phone number.
      */
     public $phone;
 
     /**
-     * @var string|null VAT number.
+     * @var array|null Custom address fields
      */
-    public $vatNumber;
-
-    /**
-     * @var string|null Used only via Settings->shipFrom; not part of Snipcart’s own API.
-     */
-    public $email;
+    public $customFields;
 
     /**
      * @var bool
@@ -117,11 +107,11 @@ class Address extends \craft\base\Model
     public function rules(): array
     {
         return [
-            [['name', 'companyName', 'address1', 'address2', 'city', 'country', 'province', 'postalCode', 'phone', 'email'], 'string', 'max' => 255],
-            [['name', 'address1', 'city', 'country', 'province', 'postalCode'], 'required'],
-            [['companyName', 'address2', 'phone'], 'default', 'value' => null],
-            [['country'], 'default', 'value' => 'US'],
-            [['country', 'province'], 'string', 'length' => 2],
+            [['label', 'fullName', 'organization', 'addressLine1', 'addressLine2', 'locality', 'countryCode', 'administrativeArea', 'postalCode', 'phone', 'email'], 'string', 'max' => 255],
+            [['fullName', 'addressLine1', 'locality', 'countryCode', 'administrativeArea', 'postalCode'], 'required'],
+            [['companyName', 'addressLine2', 'phone'], 'default', 'value' => null],
+            [['countryCode'], 'default', 'value' => 'US'],
+            [['countryCode', 'administrativeArea'], 'string', 'length' => 2],
         ];
     }
 
